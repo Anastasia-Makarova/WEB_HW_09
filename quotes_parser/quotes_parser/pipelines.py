@@ -8,7 +8,13 @@
 from itemadapter import ItemAdapter
 
 
-class ScrapyTestPipeline:
+class QuotesPipeline:
+    def process_item(self, item, spider):
+        
+        return item
+    
+
+class AuthorsPipeline:
     def process_item(self, item, spider):
         
         return item
