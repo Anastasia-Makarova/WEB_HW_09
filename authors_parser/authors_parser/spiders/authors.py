@@ -3,6 +3,7 @@ import scrapy
 from scrapy.http import Request
 from pathlib import Path
 from authors_parser.items import  ScrapyAuthorItem
+import json
 
 
 class AuthorsSpider(scrapy.Spider):
@@ -19,9 +20,10 @@ class AuthorsSpider(scrapy.Spider):
         file_path = current_directory.parents[1].joinpath('quotes_parser/quotes_parser/authors_links.json')
         
         with open (file_path, 'r') as file:
-            authors_links = file.read()
-            for url in authors_links:
-                yield url
+            content = json.loads(file_path.read_text())
+
+        for url in content:
+            yield Request(url)
     #     # return super().start_requests()
 
     def compose_author(self, raw_author):
