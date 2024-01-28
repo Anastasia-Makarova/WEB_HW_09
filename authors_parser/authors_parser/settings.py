@@ -1,4 +1,4 @@
-# Scrapy settings for quotes_parser project
+# Scrapy settings for authors_parser project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "quotes_parser"
+BOT_NAME = "authors_parser"
 
-SPIDER_MODULES = ["quotes_parser.spiders"]
-NEWSPIDER_MODULE = "quotes_parser.spiders"
+SPIDER_MODULES = ["authors_parser.spiders"]
+NEWSPIDER_MODULE = "authors_parser.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "quotes_parser (+http://www.yourdomain.com)"
+#USER_AGENT = "authors_parser (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "quotes_parser.middlewares.ScrapyTestSpiderMiddleware": 543,
+#    "authors_parser.middlewares.AuthorsParserSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "quotes_parser.middlewares.ScrapyTestDownloaderMiddleware": 543,
+#    "authors_parser.middlewares.AuthorsParserDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "quotes_parser.pipelines.QuotesPipeline": 100,
+   "authors_parser.pipelines.AuthorsParserPipeline": 100,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -93,4 +93,4 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 FEED_FORMAT = "json"
-FEED_URI="quotes.json"
+FEED_URI="authors.json"

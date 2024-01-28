@@ -1,9 +1,8 @@
 import scrapy
-from quotes_parser.items import ScrapyQuoteItem, ScrapyAuthorItem
+from quotes_parser.items import ScrapyQuoteItem
 import json
 
 authors = []
-
 
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
@@ -29,37 +28,14 @@ class QuotesSpider(scrapy.Spider):
             if link not in authors:
                 authors.append(link)
             yield self.compose_quote(quote)
- 
+
         next_page = response.xpath("//li[@class='next']/a/@href").get()
 
         if next_page is not None:
             yield scrapy.Request(url=self.start_urls[0] + next_page)
+        else:
+            with  open ('authors_links.json', 'a') as file:
+                        json.dump(authors, file)
 
-        with  open ('authors_links.json', 'a') as file:
-                    json.dump(authors, file)
-
-
-
-
-
-class AuthorsSpider(scrapy.Spider):
-    name = "authors"
-    allowed_domains = ["quotes.toscrape.com"]
-    start_urls = authors
-
-    def compose_author(self, raw_author):
-
-        author = ScrapyAuthorItem()
-        author['fullname'] = raw_author.xpath("div[@class='tags']/a/text()").getall()
-        author['born_date'] = raw_author.xpath("span/small[@class='author']/text()").get()
-        # author['born_location'] = raw_author.xpath("span[@class='text']/text()").get()
-        author['description'] = raw_author.xpath("span[@class='text']/text()").get()
-
-        return author
-
-    def parse(self, response):
-        for author in authors:
-            url = f"https://quotes.toscrape.com{author}"
-            yield self.compose_author(url)
 
    
